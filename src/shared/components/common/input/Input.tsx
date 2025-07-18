@@ -1,6 +1,4 @@
-import { inputStyle, inputVariants } from '@common/input/inputStyles';
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
-
 
 import {
   inputStyle,
