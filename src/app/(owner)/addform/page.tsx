@@ -9,10 +9,12 @@ interface PageProps {
 
 export const generateMetadata = async ({
   searchParams,
-}: PageProps): Promise<Metadata> => {
-  const formId = Array.isArray(searchParams.formId)
+}: {
+  searchParams?: { [key: string]: string | string[] };
+}): Promise<Metadata> => {
+  const formId = Array.isArray(searchParams?.formId)
     ? searchParams.formId[0]
-    : searchParams.formId;
+    : searchParams?.formId;
 
   if (formId) {
     return {
@@ -27,10 +29,14 @@ export const generateMetadata = async ({
   };
 };
 
-const AddformPage = async ({ searchParams }: PageProps) => {
-  const formId = Array.isArray(searchParams.formId)
+const AddformPage = async ({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] };
+}) => {
+  const formId = Array.isArray(searchParams?.formId)
     ? searchParams.formId[0]
-    : searchParams.formId;
+    : searchParams?.formId;
   return <AddformClient formId={formId} />;
 };
 export default AddformPage;
