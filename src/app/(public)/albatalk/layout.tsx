@@ -1,9 +1,13 @@
-const AboutLayout = ({ children }: { children: React.ReactNode }) => {
+import InnerContainer from '@/shared/components/container/InnerContainer';
+
+const AlbaTalkLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <main>{children}</main>
+      <main>
+        <InnerContainer>{children}</InnerContainer>
+      </main>
     </div>
   );
 };
 
-export default AboutLayout;
+export default AlbaTalkLayout;

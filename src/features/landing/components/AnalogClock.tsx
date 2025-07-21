@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 const AnalogClock = () => {
   const [time, setTime] = useState({
@@ -44,10 +43,9 @@ const AnalogClock = () => {
     <div className="flex items-center justify-center">
       <svg
         aria-label="아날로그 시계"
-        className="drop-shadow-lg"
-        height={560}
+        className="w-224 drop-shadow-lg md:w-280 lg:w-560"
+        preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 560 560"
-        width={560}
       >
         {/* 시계 배경 */}
         <circle cx="280" cy="280" fill="#15388E" r="280" />
@@ -62,7 +60,8 @@ const AnalogClock = () => {
 
           return (
             <line
-              key={uuidv4()}
+              // eslint-disable-next-line react/no-array-index-key
+              key={i} // 눈금 개수는 변하지 않으므로 인덱스 키 사용
               stroke="#1B53DF"
               strokeWidth={i % 3 === 0 ? 8 : 3}
               x1={x1}

@@ -1,13 +1,16 @@
 'use client';
 
 import Chip from '@common/chip/Chip';
-import AuthGnb from '@common/gnb/auth-gnb';
 import EditPopup from '@common/popup/EditPopup';
 import ToastPopup from '@common/popup/ToastPopup';
 import Tab from '@common/tab/Tab';
 import Tooltip from '@common/tooltip/Tooltip';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+
+import DatePicker from '@/shared/components/common/date-picker';
+import MainGnb from '@/shared/components/common/gnb/main-gnb';
+import Dropdown from '@/shared/components/ui/Dropdown';
 
 const TestPage = () => {
   const [popupVisible, setPopupVisible] = useState(false);
@@ -24,9 +27,8 @@ const TestPage = () => {
   return (
     <div className="m-16 flex flex-col gap-24 text-md">
       <ul>
-        <li className="mb-36">
-          로그인 전 헤더
-          <AuthGnb />
+        <li className="mb-72">
+          <MainGnb />
         </li>
       </ul>
 
@@ -126,7 +128,7 @@ const TestPage = () => {
       </div>
 
       <ToastPopup
-        count={5}
+        applyCount={5}
         duration={5000}
         visible={popupVisible}
         onClose={() => setPopupVisible(false)}
@@ -139,6 +141,27 @@ const TestPage = () => {
       </div>
 
       <div className="bg-red">red</div>
+
+      <Dropdown
+        className="w-48"
+        id="example-menu"
+        trigger={
+          <button
+            className="w-full rounded bg-blue-500 px-4 py-2 text-white"
+            type="button"
+          >
+            메뉴 열기
+          </button>
+        }
+      >
+        <ul className="flex flex-col gap-2 p-4">
+          <li className="cursor-pointer hover:text-blue-500">옵션 1</li>
+          <li className="cursor-pointer hover:text-blue-500">옵션 2</li>
+          <li className="cursor-pointer hover:text-blue-500">옵션 3</li>
+        </ul>
+      </Dropdown>
+
+      <DatePicker />
     </div>
   );
 };

@@ -1,9 +1,5 @@
 import { DetailedHTMLProps, TextareaHTMLAttributes } from 'react';
 
-import {
-  inputStyle,
-  inputVariants,
-} from '@/shared/components/common/input/inputStyles';
 import { cn } from '@/shared/lib/cn';
 
 interface TextareaProps

@@ -1,9 +1,14 @@
-const Signup = () => {
+import AuthForm from '@/features/auth/components/AuthForm';
+import AuthSns from '@/features/auth/components/AuthSns';
+
+const SignUpPage = () => {
   return (
-    <div>
-      <h1>로그인 페이지</h1>
-    </div>
+    <>
+      <h1 className="sr-only">회원가입 페이지</h1>
+      <AuthForm />
+      <AuthSns />
+    </>
   );
 };
 
-export default Signup;
+export default SignUpPage;

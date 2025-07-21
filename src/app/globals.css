@@ -50,6 +50,9 @@
   --text-3xl--line-height: 2.625rem;
 
   --spacing: 0.0625rem;
+
+  --breakpoint-3xl: 120rem;
+  --breakpoint-xs: 23.4375rem; /* 375px */
 }
 
 /* 다크모드 토글 버튼 유틸리티 클래스 */
@@ -101,11 +104,11 @@
 }
 
 .BG-mint {
-  @apply bg-green-400 hover:bg-green-500 dark:bg-green-500 dark:hover:bg-green-600;
+  @apply bg-mint-100 hover:bg-mint-200 dark:bg-mint-300 dark:hover:bg-mint-400;
 }
 
 .BG-lightmint {
-  @apply bg-green-100 dark:bg-green-900;
+  @apply bg-mint-50 dark:bg-mint-400;
 }
 
 .BG-mint-disabled {
@@ -113,7 +116,7 @@
 }
 
 .BG-solid-mint {
-  @apply bg-green-500;
+  @apply bg-mint-400;
 }
 
 .Text-black {
@@ -122,6 +125,10 @@
 
 .Text-gray {
   @apply text-gray-400 dark:text-gray-200;
+}
+
+.Text-darkgray {
+  @apply text-gray-400 dark:text-gray-500;
 }
 
 .Text-white {
@@ -133,22 +140,26 @@
   @apply text-white dark:text-gray-50;
 }
 
+.Text-error {
+  @apply text-error dark:text-red-400;
+}
+
 .Text-btn {
-  @apply text-green-500 dark:text-green-400;
+  @apply text-mint-400 dark:text-mint-300;
 }
 
 .Text-deepmint {
-  @apply text-green-500 dark:text-green-400;
+  @apply text-mint-400 dark:text-mint-300;
 }
 
 .Text-mint {
-  @apply text-green-400 dark:text-green-500;
+  @apply text-mint-300 dark:text-mint-400;
 }
 
 .Border-mint {
-  @apply border border-green-400 dark:border-green-500;
+  @apply border border-mint-300 dark:border-mint-400;
 }
 
 .BG-drag-hovered {
-  @apply bg-green-100;
+  @apply bg-mint-100;
 }
