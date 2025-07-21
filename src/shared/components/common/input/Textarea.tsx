@@ -2,6 +2,8 @@ import { DetailedHTMLProps, TextareaHTMLAttributes } from 'react';
 
 import { cn } from '@/shared/lib/cn';
 
+import { inputStyle, inputVariants } from './inputStyles';
+
 interface TextareaProps
   extends DetailedHTMLProps<
     TextareaHTMLAttributes<HTMLTextAreaElement>,
