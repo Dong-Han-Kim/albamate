@@ -2,16 +2,16 @@ import { Metadata } from 'next';
 
 import AddformClient from '@/features/owner/addform/components/AddformClient';
 
-interface PageProps {
-  params?: { [key: string]: string };
-  searchParams: { [key: string]: string | string[] };
+interface AddformPageProps {
+  searchParams?: {
+    formId?: string | string[];
+    [key: string]: undefined | string | string[];
+  };
 }
 
 export const generateMetadata = async ({
   searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] };
-}): Promise<Metadata> => {
+}: AddformPageProps): Promise<Metadata> => {
   const formId = Array.isArray(searchParams?.formId)
     ? searchParams.formId[0]
     : searchParams?.formId;
@@ -29,11 +29,7 @@ export const generateMetadata = async ({
   };
 };
 
-const AddformPage = async ({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] };
-}) => {
+const AddformPage = async ({ searchParams }: AddformPageProps) => {
   const formId = Array.isArray(searchParams?.formId)
     ? searchParams.formId[0]
     : searchParams?.formId;
