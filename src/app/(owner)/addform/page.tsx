@@ -5,12 +5,9 @@ import AddformClient from '@/features/owner/addform/components/AddformClient';
 export const generateMetadata = async ({
   searchParams,
 }: {
-  searchParams?: Record<string, string | string[]>;
+  searchParams: Promise<{ formId?: string }>;
 }): Promise<Metadata> => {
-  const formId = Array.isArray(searchParams?.formId)
-    ? searchParams.formId[0]
-    : searchParams?.formId;
-
+  const formId = (await searchParams).formId;
   if (formId) {
     return {
       title: `알바폼 수정하기`,
@@ -27,11 +24,9 @@ export const generateMetadata = async ({
 const AddformPage = async ({
   searchParams,
 }: {
-  searchParams?: Record<string, string | string[]>;
+  searchParams: Promise<{ formId?: string }>;
 }) => {
-  const formId = Array.isArray(searchParams?.formId)
-    ? searchParams.formId[0]
-    : searchParams?.formId;
+  const formId = (await searchParams).formId;
   return <AddformClient formId={formId} />;
 };
 export default AddformPage;
