@@ -40,7 +40,7 @@ const PostList: React.FC = () => {
           ))}
         </section>
         <FloatingButtonContainer>
-          <FloatingButton href="/albatalk/" type="addAlbatalk" />
+          <FloatingButton href="/addtalk/" type="addAlbatalk" />
         </FloatingButtonContainer>
       </div>
     </div>

@@ -15,9 +15,9 @@ import { createSlidesFromUrls } from '@/shared/utils/carousel';
 
 import { albaMockData } from '../mocks/mockData';
 import ApplicationList from './AlbaApplicationList';
-import AlbaPageDesktop from './desktop/AlbaPageDesktop';
+import AlbaPageDesktop from './Desktop/AlbaPageDesktop';
 import RecruitCloseModal from './modal/RecruitClosedModal';
-import AlbaPageTablet from './tablet/AlbaPageTablet';
+import AlbaPageTablet from './Tablet/AlbaPageTablet';
 
 const AlbaPage = () => {
   const { formId } = useParams();
