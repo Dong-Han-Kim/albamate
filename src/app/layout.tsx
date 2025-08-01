@@ -6,6 +6,7 @@ import { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
+import { Suspense } from 'react';
 
 import { Providers } from '@/app/providers';
 
@@ -36,17 +37,19 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html suppressHydrationWarning lang="ko">
       <body className={`${pretendard.className} dark:bg-gray-900`}>
-        <SessionProvider>
-          <ThemeProvider enableSystem attribute="class" defaultTheme="system">
-            <Providers>
-              <div className="mb-48">
-                <GnbRenderer />
-              </div>
-              {children}
-              <ModalManager />
-            </Providers>
-          </ThemeProvider>
-        </SessionProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+          <SessionProvider>
+            <ThemeProvider enableSystem attribute="class" defaultTheme="system">
+              <Providers>
+                <div className="mb-48">
+                  <GnbRenderer />
+                </div>
+                {children}
+                <ModalManager />
+              </Providers>
+            </ThemeProvider>
+          </SessionProvider>
+        </Suspense>
       </body>
     </html>
   );
