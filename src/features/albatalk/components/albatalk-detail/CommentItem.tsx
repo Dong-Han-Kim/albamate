@@ -6,8 +6,9 @@ import PrimaryButton from '@/shared/components/common/button/PrimaryButton';
 import Textarea from '@/shared/components/common/input/Textarea';
 import KebabMenuDropdown from '@/shared/components/common/kebabMenuDropdown';
 
-import { Comment } from '../../types/albatalk';
-import PostMetaInfoUser from '../post-item/PostMetaInfoUser';
+import { Comment } from '../../schemas/albatalk.schema';
+import AlbatalkMetaInfoUser from '../albatalk-item/AlbatalkMetaInfoUser';
+import CommentContent from './CommentContent';
 
 interface CommentItemProps {
   comment: Comment;
@@ -60,7 +61,7 @@ const CommentItem = ({ comment, onEdit, onDelete }: CommentItemProps) => {
   return (
     <div className="flex flex-col items-start gap-24 border-b border-gray-100 py-16 last:border-b-0">
       <div className="flex w-full justify-between">
-        <PostMetaInfoUser
+        <AlbatalkMetaInfoUser
           className="text-xs text-gray-500 lg:text-base"
           createdAt={comment.createdAt}
           writer={comment.writer}
@@ -96,9 +97,10 @@ const CommentItem = ({ comment, onEdit, onDelete }: CommentItemProps) => {
         </div>
       ) : (
         // 일반 보기 모드일 때 (댓글 내용을 보여줌)
-        <p className="pl-4 text-sm leading-relaxed md:text-base lg:text-xl">
-          {comment.content}
-        </p>
+        <CommentContent
+          className="pl-4 text-sm leading-relaxed md:text-base lg:text-xl"
+          content={comment.content}
+        />
       )}
     </div>
   );

@@ -42,6 +42,7 @@ interface DatePickerProps {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
+  defaultValue?: DateRange;
 }
 
 const DatePicker = ({
@@ -49,9 +50,12 @@ const DatePicker = ({
   placeholder = '시작일 - 종료일',
   disabled = false,
   className,
+  defaultValue,
 }: DatePickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dateRange, setDateRange] = useState<DateRange | undefined>();
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(
+    defaultValue
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
