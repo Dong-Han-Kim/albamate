@@ -142,7 +142,7 @@ const createResponseInterceptor = (instance: AxiosInstance) => ({
 
 export const axiosInstance = axios.create({
   baseURL,
-  withCredentials: !isDevelopment,
+  withCredentials: false, // CORS 이슈로 임시 비활성화
 });
 
 // 공통 인터셉터 적용
