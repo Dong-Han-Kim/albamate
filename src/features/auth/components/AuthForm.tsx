@@ -18,7 +18,6 @@ import type {
 } from '@/features/auth/types';
 import { getAuthPageType } from '@/features/auth/utils/authUtils';
 import PrimaryButton from '@/shared/components/common/button/PrimaryButton';
-import EditPopup from '@/shared/components/common/popup/EditPopup';
 import { extractAuthErrorMessage } from '@/shared/lib/auth/error-messages';
 
 import AuthFormFields from './AuthFormFields';
@@ -378,13 +377,6 @@ const AuthForm = () => {
       </form>
 
       {/* 로그인 상태 메시지 팝업 */}
-      <EditPopup
-        duration={3000}
-        message={loginStatus.message}
-        type={loginStatus.type}
-        visible={loginStatus.visible}
-        onClose={() => setLoginStatus(prev => ({ ...prev, visible: false }))}
-      />
     </>
   );
 };

@@ -15,7 +15,6 @@ import {
   createFormRequestSchema,
 } from '@/features/addform/schema/addform.schema';
 import PrimaryButton from '@/shared/components/common/button/PrimaryButton';
-import EditPopup from '@/shared/components/common/popup/EditPopup';
 import useViewport from '@/shared/hooks/useViewport';
 
 import AddformButtons from './AddformButtons';
@@ -217,13 +216,6 @@ const AddformClient = ({ formId }: { formId?: string }) => {
           )}
         </div>
       </div>
-      <EditPopup
-        message={message}
-        visible={visible}
-        onClose={() => {
-          setVisible(false);
-        }}
-      />
     </FormProvider>
   );
 };
