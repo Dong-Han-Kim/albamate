@@ -7,6 +7,7 @@ import {
   CreateFormResponse,
 } from '@/features/addform/schema/addform.schema';
 import { axiosInstance } from '@/shared/lib/axios';
+import { generateUniqueFileName } from '@/shared/utils/generateUniqueFileName';
 
 export const useAddformApi = () => {
   const authAxios = axiosInstance;
@@ -24,7 +25,8 @@ export const useAddformApi = () => {
     },
     uploadImage: (file: File): Promise<AxiosResponse<{ url: string }>> => {
       const formData = new FormData();
-      formData.append('image', file);
+      const newFileName = generateUniqueFileName(file);
+      formData.append('image', file, newFileName);
       return authAxios.post('/images/upload', formData);
     },
   };
