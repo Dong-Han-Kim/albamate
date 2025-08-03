@@ -18,10 +18,14 @@ export const useAddformApi = () => {
     ): Promise<AxiosResponse<CreateFormResponse>> => {
       return authAxios.post('/forms', form);
     },
-    editAddform: (
-      form: CreateFormRequest
-    ): Promise<AxiosResponse<CreateFormResponse>> => {
-      return authAxios.patch('/forms', form);
+    editAddform: ({
+      formId,
+      form,
+    }: {
+      formId: number;
+      form: CreateFormRequest;
+    }): Promise<AxiosResponse<CreateFormResponse>> => {
+      return authAxios.patch(`/forms/${formId}`, form);
     },
     uploadImage: (file: File): Promise<AxiosResponse<{ url: string }>> => {
       const formData = new FormData();
