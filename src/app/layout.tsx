@@ -10,6 +10,8 @@ import { Suspense } from 'react';
 
 import { Providers } from '@/app/providers';
 
+import EditPopup from '../shared/components/common/popup/EditPopup';
+
 const pretendard = localFont({
   src: '../../public/fonts/PretendardVariable.woff2',
   display: 'swap',
@@ -46,6 +48,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 </div>
                 {children}
                 <ModalManager />
+                <EditPopup />
               </Providers>
             </ThemeProvider>
           </SessionProvider>
