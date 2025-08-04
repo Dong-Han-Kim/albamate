@@ -47,7 +47,6 @@ const EditPopup = () => {
   const { visible, message, type, duration, hidePopup } = usePopupStore();
   const [isRender, setIsRender] = useState(visible);
   const [animationClass, setAnimationClass] = useState('');
-
   // visible 상태에 따라 등장 및 사라짐 애니메이션 처리
   useEffect(() => {
     if (visible) {
