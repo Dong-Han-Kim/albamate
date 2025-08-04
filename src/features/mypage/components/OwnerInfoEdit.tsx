@@ -4,6 +4,7 @@ import Input from '@common/input/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import z from 'zod';
 
 import MyPageAddressSearchModal from '@/shared/components/common/input/MyPageAddressSearchModal';
 import ProfileEdit from '@/shared/components/common/profile/ProfileEdit';
@@ -33,18 +34,24 @@ const OwnerInfoEdit = ({ userInfo, close }: OwnerInfoEditProps) => {
     formState: { errors },
     setValue,
     watch,
-  } = useForm<UpdateOwnerMyProfile>({
+  } = useForm<z.infer<typeof createOwnerSchema>>({
     resolver: zodResolver(createOwnerSchema),
     defaultValues: {
-      nickname: userInfo?.nickname,
-      storeName: userInfo.storeName === 'undefined' ? '' : userInfo.storeName,
+      nickname: userInfo?.nickname ?? '',
+      storeName:
+        userInfo.storeName === 'undefined' || userInfo.storeName == null
+          ? ''
+          : userInfo.storeName,
       storePhoneNumber:
-        userInfo.storePhoneNumber === 'undefined'
+        userInfo.storePhoneNumber === 'undefined' ||
+        userInfo.storePhoneNumber == null
           ? ''
           : userInfo.storePhoneNumber,
-      phoneNumber:
-        userInfo.phoneNumber === 'undefined' ? '' : userInfo.phoneNumber,
-      location: userInfo.location === 'undefined' ? '' : userInfo.location,
+      phoneNumber: userInfo.phoneNumber ?? '',
+      location:
+        userInfo.location === 'undefined' || userInfo.location == null
+          ? ''
+          : userInfo.location,
     },
   });
 
