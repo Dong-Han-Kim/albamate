@@ -1,5 +1,4 @@
 import { auth } from '@/auth';
-import { auth } from '@/auth';
 import AlbaListPage from '@/features/albalist/components/AlbaListPage';
 import InnerContainer from '@/shared/components/container/InnerContainer';
 
