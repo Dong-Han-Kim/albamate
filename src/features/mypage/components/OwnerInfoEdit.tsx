@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import z from 'zod';
 
-import MyPageAddressSearchModal from '@/shared/components/common/input/MyPageAddressSearchModal';
 import ProfileEdit from '@/shared/components/common/profile/ProfileEdit';
 import { usePopupStore } from '@/shared/store/popupStore';
 import { FormData } from '@/shared/types/mypage';
@@ -17,6 +16,7 @@ import {
   createOwnerSchema,
   UpdateOwnerMyProfile,
 } from '../schema/mypage.schema';
+import MyPageAddressSearchModal from './MyPageAddressSearchModal';
 
 interface OwnerInfoEditProps {
   userInfo: FormData;
@@ -39,14 +39,13 @@ const OwnerInfoEdit = ({ userInfo, close }: OwnerInfoEditProps) => {
     defaultValues: {
       nickname: userInfo?.nickname ?? '',
       storeName:
-        userInfo.storeName === 'undefined' || userInfo.storeName == null
-          ? ''
-          : userInfo.storeName,
+        userInfo?.storeName && userInfo.storeName !== 'undefined'
+          ? userInfo.storeName
+          : '',
       storePhoneNumber:
-        userInfo.storePhoneNumber === 'undefined' ||
-        userInfo.storePhoneNumber == null
-          ? ''
-          : userInfo.storePhoneNumber,
+        userInfo?.storePhoneNumber && userInfo.storePhoneNumber !== 'undefined'
+          ? userInfo.storePhoneNumber
+          : '',
       phoneNumber: userInfo.phoneNumber ?? '',
       location:
         userInfo.location === 'undefined' || userInfo.location == null
