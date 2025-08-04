@@ -154,7 +154,7 @@ const OwnerInfoEdit = ({ userInfo, close }: OwnerInfoEditProps) => {
           가게 위치 <span className="text-mint-100">*</span>
         </label>
         <MyPageAddressSearchModal
-          currentAddress={watch('location')}
+          currentAddress={watch('location') || ''}
           onAddressSelect={(address: string) => {
             setValue('location', address);
           }}
@@ -167,8 +167,9 @@ const OwnerInfoEdit = ({ userInfo, close }: OwnerInfoEditProps) => {
             placeholder="위치를 입력해주세요."
             position="left"
             src="/icons/pin-solid.svg"
-            value={watch('location')}
+            value={watch('location') || ''}
             variant="outlined"
+            {...register('location')}
           />
         </MyPageAddressSearchModal>
         {errors.location && (
