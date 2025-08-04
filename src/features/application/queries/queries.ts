@@ -7,7 +7,7 @@ import {
 import { AxiosResponse } from 'axios';
 import { useSession } from 'next-auth/react';
 
-import { AlbaItem } from '@/features/alba/types/AlbaItem';
+import { AlbaItemDetail } from '@/shared/types/albaDetail';
 
 import { useApplicationDetailApi } from '../api/applicationDetail';
 
@@ -23,7 +23,7 @@ const DEFAULT_QUERY_OPTIONS = {
 // 알바폼 상세 조회 쿼리
 export const useAlbaformDetailQuery = (
   formId: string,
-  initialData?: AlbaItem,
+  initialData?: AlbaItemDetail,
   options = {}
 ) => {
   const api = useApplicationDetailApi();
