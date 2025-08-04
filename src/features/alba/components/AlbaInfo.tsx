@@ -4,10 +4,10 @@ import React from 'react';
 import useViewport from '@/shared/hooks/useViewport'; // 너가 저장한 경로에 따라 수정
 import { formatDateLong, formatDateShort } from '@/shared/utils/format';
 
-import { MockAlbaItem } from '../types/MockAlbaItem';
+import { AlbaItem } from '../types/AlbaItem';
 
 interface AlbaInfoProps {
-  item: MockAlbaItem;
+  item: AlbaItem;
 }
 
 const getBorderClass = (idx: number) => {

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { MockAlbaItem } from '../types/MockAlbaItem';
+import { AlbaItem } from '../types/AlbaItem';
 
 interface AlbaConditionProps {
-  item: MockAlbaItem;
+  item: AlbaItem;
 }
 
 const AlbaCondition: React.FC<AlbaConditionProps> = ({ item }) => {

@@ -3,10 +3,10 @@ import { format } from 'date-fns';
 import Image from 'next/image';
 import React from 'react';
 
-import { MockAlbaItem } from '@/features/alba/types/MockAlbaItem';
+import { AlbaItem } from '@/features/alba/types/AlbaItem';
 
 interface AlbaDetailProps {
-  item: MockAlbaItem;
+  item: AlbaItem;
 }
 
 /**

@@ -8,10 +8,10 @@ import {
   getDDayString,
 } from '@/shared/utils/format';
 
-import { MockAlbaItem } from '../types/MockAlbaItem';
+import { AlbaItem } from '../types/AlbaItem';
 
 interface AlbaContactProps {
-  item: MockAlbaItem;
+  item: AlbaItem;
 }
 
 const AlbaContact: React.FC<AlbaContactProps> = ({ item }) => {
