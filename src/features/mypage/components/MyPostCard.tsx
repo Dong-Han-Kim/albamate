@@ -27,7 +27,7 @@ const MyPostCard = ({ cardContent, dropdownItem }: MyPostCardProps) => {
           <span className="relative inline-flex h-24 w-24 items-center justify-center lg:h-36 lg:w-36">
             <Image fill alt="제목" sizes="36px" src="/icons/apply-list.svg" />
           </span>
-          <h3 className="Text-black overflow-hidden text-lg font-medium text-ellipsis whitespace-nowrap">
+          <h3 className="Text-black max-w-360 overflow-hidden text-lg font-medium text-ellipsis whitespace-nowrap">
             {cardContent.title}
           </h3>
         </div>

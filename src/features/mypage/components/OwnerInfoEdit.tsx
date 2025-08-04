@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import MyPageAddressSearchModal from '@/shared/components/common/input/MyPageAddressSearchModal';
 import ProfileEdit from '@/shared/components/common/profile/ProfileEdit';
 import { usePopupStore } from '@/shared/store/popupStore';
 import { FormData } from '@/shared/types/mypage';
@@ -30,6 +31,8 @@ const OwnerInfoEdit = ({ userInfo, close }: OwnerInfoEditProps) => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    watch,
   } = useForm<UpdateOwnerMyProfile>({
     resolver: zodResolver(createOwnerSchema),
     defaultValues: {
@@ -150,16 +153,24 @@ const OwnerInfoEdit = ({ userInfo, close }: OwnerInfoEditProps) => {
         <label className="mb-8 text-md" htmlFor="location">
           가게 위치 <span className="text-mint-100">*</span>
         </label>
-        <IconInput
-          alt="위치"
-          id="location"
-          placeholder="위치를 입력해주세요."
-          position="left"
-          src="/icons/pin-solid.svg"
-          variant="outlined"
-          {...register('location')}
-          isInvalid={!!errors.location}
-        />
+        <MyPageAddressSearchModal
+          currentAddress={watch('location')}
+          onAddressSelect={(address: string) => {
+            setValue('location', address);
+          }}
+        >
+          <IconInput
+            readOnly
+            alt="위치"
+            id="location"
+            isInvalid={!!errors.location}
+            placeholder="위치를 입력해주세요."
+            position="left"
+            src="/icons/pin-solid.svg"
+            value={watch('location')}
+            variant="outlined"
+          />
+        </MyPageAddressSearchModal>
         {errors.location && (
           <p className="text-sm text-red-500">{errors.location.message}</p>
         )}

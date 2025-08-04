@@ -26,7 +26,7 @@ const MyCommentCard = ({ cardContent, dropdownItem }: MyCommentCardProps) => {
           <span className="relative inline-flex h-24 w-24 items-center justify-center lg:h-36 lg:w-36">
             <Image fill alt="제목" sizes="36px" src="/icons/apply-list.svg" />
           </span>
-          <h3 className="Text-black overflow-hidden text-xs font-medium text-ellipsis whitespace-nowrap lg:text-lg">
+          <h3 className="Text-black max-w-360 overflow-hidden text-xs font-medium text-ellipsis whitespace-nowrap lg:text-lg">
             {cardContent.post.title}
           </h3>
         </div>
