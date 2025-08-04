@@ -43,6 +43,7 @@ export const useUpdateMyProfileQuery = () => {
     ) => await api.updateMyProfile(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['myProfile'] });
+      queryClient.invalidateQueries({ queryKey: ['myPosts'] });
     },
   });
 };
