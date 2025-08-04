@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import { usePopupStore } from '@/shared/store/popupStore';
 
@@ -86,7 +87,7 @@ const EditPopup = () => {
 
   const size = iconSizes[type];
 
-  return (
+  return createPortal(
     <div
       className={`Text-white-gray fixed top-60 left-1/2 z-50 flex -translate-x-1/2 items-center gap-6 rounded-xl bg-blue-300 px-80 py-12 text-xs whitespace-nowrap shadow-lg transition-all duration-500 ease-in-out md:px-120 md:text-md lg:px-150 lg:text-lg ${animationClass}`}
     >
@@ -102,7 +103,8 @@ const EditPopup = () => {
         />
       </div>
       <span className="flex-1">{message}</span>
-    </div>
+    </div>,
+    document.body
   );
 };
 
