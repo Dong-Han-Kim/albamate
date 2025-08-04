@@ -1,16 +1,15 @@
 import './globals.css';
 
-import GnbRenderer from '@common/gnb/GnbRenderer'; // dynamic 없이 일반 import
+// dynamic 없이 일반 import
 import ModalManager from '@common/modal/ModalManager';
 import { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
-import { Suspense } from 'react';
 
 import { Providers } from '@/app/providers';
-
-import EditPopup from '../shared/components/common/popup/EditPopup';
+import ClientGnbWrapper from '@/shared/components/common/gnb/ClientGnbWrapper';
+import EditPopup from '@/shared/components/common/popup/EditPopup';
 
 const pretendard = localFont({
   src: '../../public/fonts/PretendardVariable.woff2',
@@ -39,20 +38,16 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html suppressHydrationWarning lang="ko">
       <body className={`${pretendard.className} dark:bg-gray-900`}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <SessionProvider>
-            <ThemeProvider enableSystem attribute="class" defaultTheme="system">
-              <Providers>
-                <div className="mb-48">
-                  <GnbRenderer />
-                </div>
-                {children}
-                <ModalManager />
-                <EditPopup />
-              </Providers>
-            </ThemeProvider>
-          </SessionProvider>
-        </Suspense>
+        <SessionProvider>
+          <ThemeProvider enableSystem attribute="class" defaultTheme="system">
+            <Providers>
+              <ClientGnbWrapper />
+              {children}
+              <ModalManager />
+              <EditPopup />
+            </Providers>
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

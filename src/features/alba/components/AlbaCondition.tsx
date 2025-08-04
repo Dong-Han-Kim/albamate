@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { AlbaItem } from '../types/AlbaItem';
+import { AlbaItemDetail } from '@/shared/types/albaDetail';
 
 interface AlbaConditionProps {
-  item: AlbaItem;
+  item: AlbaItemDetail;
 }
 
 const AlbaCondition: React.FC<AlbaConditionProps> = ({ item }) => {
