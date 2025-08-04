@@ -3,12 +3,14 @@
 import { useRouter } from 'next/navigation';
 
 import KebabMenuDropdown from '@/shared/components/common/kebabMenuDropdown';
+import { useSessionUtils } from '@/shared/lib/auth/use-session-utils';
 import { cn } from '@/shared/lib/cn';
 
 import { useDeleteAlbatalk } from '../../hooks/useAlbatalk';
 
 interface AlbatalkHeaderProps {
   title: string;
+  writerId: number;
   albatalkId: number;
   className?: string;
   titleClassName?: string;
@@ -18,10 +20,14 @@ const AlbatalkCardHeader = ({
   title,
   albatalkId,
   className,
+  writerId,
   titleClassName,
 }: AlbatalkHeaderProps) => {
   const router = useRouter();
   const deleteMutation = useDeleteAlbatalk();
+
+  const { user } = useSessionUtils();
+  const isOwner = writerId === user?.id;
 
   const handleActionClick = async (option: string) => {
     if (option === 'edit') {
@@ -33,8 +39,6 @@ const AlbatalkCardHeader = ({
       if (isConfirmed) {
         try {
           await deleteMutation.mutateAsync(albatalkId);
-          alert('게시글이 성공적으로 삭제되었습니다.');
-
           router.push('/albatalk');
         } catch (error) {
           console.error('게시글 삭제 실패:', error);
@@ -47,7 +51,7 @@ const AlbatalkCardHeader = ({
   const menuOptions = [
     { label: '수정하기', onClick: () => handleActionClick('edit') },
     {
-      label: deleteMutation.isPending ? '삭제 중...' : '삭제하기',
+      label: '삭제하기',
       onClick: () => handleActionClick('delete'),
       disabled: deleteMutation.isPending,
     },
@@ -63,7 +67,7 @@ const AlbatalkCardHeader = ({
       >
         {title}
       </h2>
-      <KebabMenuDropdown options={menuOptions} />
+      {isOwner && <KebabMenuDropdown options={menuOptions} />}
     </div>
   );
 };
