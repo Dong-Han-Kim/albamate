@@ -35,12 +35,10 @@ const processQueue = (error: any, token: string | null = null) => {
 const refreshToken = async (
   refreshToken: string
 ): Promise<{ accessToken: string; refreshToken: string }> => {
-  console.log('🔄 토큰 갱신 요청 시작');
   const response = await axios.post(`${baseURL}auth/refresh`, {
     refreshToken,
   });
 
-  console.log('✅ 토큰 갱신 성공:', response.data);
   return response.data;
 };
 
@@ -50,11 +48,6 @@ const createRequestInterceptor = () => async (config: any) => {
     const session = (await getSession()) as any;
     if (session?.accessToken) {
       config.headers.Authorization = `Bearer ${session.accessToken}`;
-      console.log('📤 요청 전송:', {
-        url: config.url,
-        method: config.method,
-        hasToken: !!session.accessToken,
-      });
     }
   } catch (error) {
     console.error('세션 가져오기 실패:', error);
@@ -65,37 +58,24 @@ const createRequestInterceptor = () => async (config: any) => {
 // 공통 응답 인터셉터
 const createResponseInterceptor = (instance: AxiosInstance) => ({
   onFulfilled: (response: AxiosResponse) => {
-    console.log('📥 응답 수신:', {
-      url: response.config.url,
-      status: response.status,
-    });
     return response;
   },
   onRejected: async (error: AxiosError) => {
     const originalRequest = error.config as any;
-
-    console.log('❌ 응답 에러:', {
-      url: originalRequest?.url,
-      status: error.response?.status,
-      message: error.message,
-    });
 
     // 401 에러가 아니거나 이미 재시도된 요청이면 그대로 에러 반환
     if (error.response?.status !== 401 || originalRequest._retry) {
       return Promise.reject(error);
     }
 
-    console.log('🔄 401 에러 감지, 토큰 갱신 시작');
-
     // 이미 토큰 갱신 중이면 대기열에 추가
     if (isRefreshing) {
-      console.log('⏳ 토큰 갱신 중, 대기열에 추가');
       return new Promise((resolve, reject) => {
         failedQueue.push({ resolve, reject });
       })
         .then(token => {
           originalRequest.headers.Authorization = `Bearer ${token}`;
-          console.log('🔄 대기열 요청 재시도');
+
           return instance(originalRequest);
         })
         .catch(err => {
@@ -112,7 +92,6 @@ const createResponseInterceptor = (instance: AxiosInstance) => ({
         throw new Error('리프레시 토큰이 없습니다.');
       }
 
-      console.log('🔄 토큰 갱신 시도 중...');
       const refreshedTokens = await refreshToken(session.refreshToken);
 
       // 세션 업데이트 (NextAuth JWT 콜백에서 처리됨)
@@ -121,16 +100,14 @@ const createResponseInterceptor = (instance: AxiosInstance) => ({
 
       // 현재 요청 재시도
       originalRequest.headers.Authorization = `Bearer ${refreshedTokens.accessToken}`;
-      console.log('🔄 원본 요청 재시도');
+
       return instance(originalRequest);
     } catch (refreshError) {
-      console.error('❌ 토큰 갱신 실패:', refreshError);
-
       // 토큰 갱신 실패 시 대기 중인 요청들 모두 실패 처리
       processQueue(refreshError, null);
 
       // 로그아웃 처리
-      console.log('🚪 로그아웃 처리');
+
       await signOut({ redirect: false });
 
       return Promise.reject(refreshError);
